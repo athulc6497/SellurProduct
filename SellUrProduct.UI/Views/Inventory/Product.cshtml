@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SellurProduct.Model.Item>
+
+@{
+    ViewData["Title"] = "Key Tags";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar Filters -->
+        <div class="col-md-3">
+            <h5 class="mb-3">AVAILABILITY</h5>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="inStock">
+                <label class="form-check-label" for="inStock">In stock</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="outStock">
+                <label class="form-check-label" for="outStock">Out of stock</label>
+            </div>
+
+            <h5 class="mt-4 mb-3">PRICE</h5>
+            <input type="range" class="form-range" min="0" max="450" id="priceRange">
+            <div class="d-flex justify-content-between">
+                <span>₹0</span>
+                <span>₹450</span>
+            </div>
+
+            <h5 class="mt-4 mb-3">PRODUCT TYPE</h5>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="typeKeychains">
+                <label class="form-check-label" for="typeKeychains">Keychains</label>
+            </div>
+        </div>
+
+        <!-- Product Listing -->
+        <div class="col-md-9">
+            <div class="d-flex justify-content-between mb-3">
+                <div>Showing: @Model.Count() Results</div>
+                <div>
+                    <select class="form-select w-auto">
+                        <option selected>Featured</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+                @foreach (var item in Model)
+                {
+                    <div class="col">
+                        <div class="card product-card shadow-sm">
+@*                             <span class="position-absolute top-0 start-0 bg-success text-white px-2 py-1 small">-@item.Discount%</span>
+ *@                            <img src="@item.ImagePath" class="card-img-top" alt="@item.Name" />
+                            <div class="card-body p-2 text-center">
+                                <p class="card-text">@item.Name</p>
+                                <p class="text-muted">₹@item.Price</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
